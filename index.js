@@ -84,24 +84,6 @@ const bootstrap = () => {
         } else {
             console.log(`Foydalanuvchidan xabar: ${text}`);  // Boshqa xabarlarni logga chiqarish
         }
-
-        if (text === '/dating') {
-            const responseText = "Tanlang:";
-            await bot.sendMessage(
-                chatId,
-                responseText,
-                {
-                    reply_markup: {
-                        inline_keyboard: [
-                            [{ text: "Soff.uz nima?", callback_data: 'soff_uz_nima' }],
-                            [{ text: "Video qo'llanma", callback_data: 'video_qollanma' }],
-                            [{ text: "Sotuvchiga aylaning", callback_data: 'sotuvchiga_aylaning' }],
-                            [{ text: "Savol-javoblar", callback_data: 'help' }]
-                        ]
-                    }
-                }
-            );
-        }
     });
 
     bot.on('callback_query', async callbackQuery => {
