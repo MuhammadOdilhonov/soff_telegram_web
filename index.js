@@ -84,6 +84,22 @@ const bootstrap = () => {
 
             // Holatni qayta boshlash
             userStates[chatId] = null;
+        } else if (text === '/dating') {
+            const responseText = "Tanlang:";
+            await bot.sendMessage(
+                chatId,
+                responseText,
+                {
+                    reply_markup: {
+                        inline_keyboard: [
+                            [{ text: "Soff.uz nima?", callback_data: 'soff_uz_nima' }],
+                            [{ text: "Video qo'llanma", callback_data: 'video_qollanma' }],
+                            [{ text: "Sotuvchiga aylaning", callback_data: 'sotuvchiga_aylaning' }],
+                            [{ text: "Savol-javoblar", callback_data: 'savol_javoblar' }]
+                        ]
+                    }
+                }
+            );
         } else {
             console.log(`Foydalanuvchidan xabar: ${text}`);  // Boshqa xabarlarni logga chiqarish
         }
@@ -102,20 +118,58 @@ Intellektual mulk - ijodiy aqliy faoliyat mahsuli. Ixtirochilik va mualliflik ob
 Endilikda siz Soff Marketi orqali o'z intellektual mulklaringizni joylab daromad topishingiz mumkin.`;
 
             await bot.sendMessage(msg.chat.id, responseText);
-        } else if (data === 'video_qollanma') {
-            const imageUrl = 'https://img.youtube.com/vi/eIq-wUHWP_0/0.jpg'; // Videoning thumbnail URL manzili
-            const caption = 'Bu rasm sizning tekstingiz bilan birga';
+        } else if (data === 'sotuvchiga_aylaning') {
+            const textmeniger1 = `Sotuvchiga aylaning`
+            const textmeniger2 = `O'z Intellektual mulklaringizni Soff Marketga joylab, daromadga ega bo‘lishingiz uchun Sotuvchi bo'lib ro'yxatdan o'ting! Uning uchun quyidagi 5 qadamni amalga oshiring.`
+            const textmeniger3 = `1) Ro'yxatdan o'tish oynasiga o'ting`
+            const imageUrl1 = 'https://soff.uz/static/img/soff/soff%20market%20asosiy%20oynasi.png';
+            const textmeniger4 = `2) "Sotuvchi" tugmasiga bosing.`
+            const imageUrl2 = 'https://soff.uz/static/img/soff/soff%20marketdan%20adminkaga%20kirish%20oynasi.png';
+            const textmeniger5 = `3) Maydonlarni to'ldiring, shartlar bilan tanishib chiqganingizdan so'ng "Ro'yxatdan o'tish" tugmasini bosing.`
+            const imageUrl3 = `https://soff.uz/static/img/soff/soff%20marketdan%20ro'yxatdan%20o'tish%20oynasi.png`;
+            const textmeniger6 = `4) Nomeringiz yoki Pochtangizga yuborilgan tasqilash kodini ko'rsatilgan maydonga kiriting, so'ng "Yuborish" tugamsini bosing.`
+            const textmeniger7 = `Agar pochtangizga kod kelmagan bo'lsa, iltimos pochtangizning "Spam" oynasiga o'tib tekshirib ko'ring.`
+            const imageUrl4 = `https://soff.uz/static/img/soff/soff%20market%20kod%20tasdiqlash%20oynasi.png`;
+            const textmeniger8 = `5) Siz muvaffaqiyatli ro'yxatdan o'tdingiz! Tabriklaymiz! :)`
+            const imageUrl5 = `https://soff.uz/static/img/soff/soff%20market%20admin%20oyansi.png`;
+
 
             try {
-                await bot.sendPhoto(msg.chat.id, imageUrl, { caption: caption });
+                await bot.sendMessage(msg.chat.id, textmeniger1);
+                await bot.sendMessage(msg.chat.id, textmeniger2);
+                await bot.sendMessage(msg.chat.id, textmeniger3);
+                await bot.sendPhoto(msg.chat.id, imageUrl1);
+                await bot.sendMessage(msg.chat.id, textmeniger4);
+                await bot.sendPhoto(msg.chat.id, imageUrl2);
+                await bot.sendMessage(msg.chat.id, textmeniger5);
+                await bot.sendPhoto(msg.chat.id, imageUrl3);
+                await bot.sendMessage(msg.chat.id, textmeniger6);
+                await bot.sendMessage(msg.chat.id, textmeniger7);
+                await bot.sendPhoto(msg.chat.id, imageUrl4);
+                await bot.sendMessage(msg.chat.id, textmeniger8);
+                await bot.sendPhoto(msg.chat.id, imageUrl5);
+
             } catch (error) {
                 console.error('Xatolik:', error);
-                await bot.sendMessage(msg.chat.id, 'Rasmni yuborishda xatolik yuz berdi.');
+                await bot.sendMessage(msg.chat.id, 'Rasim yuborishda xatolik yuz berdi.');
             }
-        } else if (data === 'help') {
-            const responseText = "Qanday savolingiz bor?";
-            await bot.sendMessage(msg.chat.id, responseText);
-            userStates[msg.chat.id] = 'awaiting_question';
+        } else if (data === 'video_qollanma') {
+            const videoUrl1 = 'https://youtu.be/R65_8d6ETnA?si=c_BeVqKnZH2_Wlmu,                                       1. Soff.uz - bu qanday startup loyiha?';
+            const videoUrl2 = 'https://youtu.be/rwqluwYKEPw?si=Um1guxc_eA1AWJmM,                                       2. Soff.uz platformasidan qanday qilib sotuvchi bo`lib ro`yxatdan o`tish mumkin ? ';
+            const videoUrl3 = 'https://youtu.be/VwmlvXKVeGI?si=uOcyQoFAfk00KMa9,                                       3. Soff.uz platformasida sotuvchining barcha funksiyalari bilan qisqacha tanishib chiqmaiz.';
+            const videoUrl4 = 'https://youtu.be/eIq-wUHWP_0?si=pevV0JkxPORlQzEN,                                       4. Soff.uz platformasiga qanday qilib o`z mahsulotimni yuklashim mumkin?';
+
+            try {
+                // Videoni yuborish
+                await bot.sendMessage(msg.chat.id, videoUrl1);
+                await bot.sendMessage(msg.chat.id, videoUrl2);
+                await bot.sendMessage(msg.chat.id, videoUrl3);
+                await bot.sendMessage(msg.chat.id, videoUrl4);
+
+            } catch (error) {
+                console.error('Xatolik:', error);
+                await bot.sendMessage(msg.chat.id, 'Videoni yuborishda xatolik yuz berdi.');
+            }
         } else if (data.startsWith('answer_')) {
             const questionId = data.split('_')[1];
             const question = questions[questionId];
