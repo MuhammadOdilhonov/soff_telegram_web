@@ -5,7 +5,7 @@ const fs = require('fs');
 const app = express();
 const port = process.env.PORT || 3000;
 
-const token = "YOUR_TELEGRAM_BOT_TOKEN"; // Tokeningizni kiriting
+const token = "6847760986:AAHrNP1khJI227ZTbrZKM68EOYM_RuKldJs"; // Tokeningizni kiriting
 
 const bot = new TelegramBot(token, { polling: true });
 
