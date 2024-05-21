@@ -1,8 +1,11 @@
-
 const TelegramBot = require('node-telegram-bot-api');
+const express = require('express');
 const fs = require('fs');
 
-const token = "6847760986:AAHrNP1khJI227ZTbrZKM68EOYM_RuKldJs";
+const app = express();
+const port = process.env.PORT || 3000;
+
+const token = "YOUR_TELEGRAM_BOT_TOKEN"; // Tokeningizni kiriting
 
 const bot = new TelegramBot(token, { polling: true });
 
@@ -158,3 +161,12 @@ Endilikda siz Soff Marketi orqali o'z intellektual mulklaringizni joylab daromad
 };
 
 bootstrap();
+
+// Express serverni sozlash
+app.get('/', (req, res) => {
+    res.send('Telegram bot ishlamoqda');
+});
+
+app.listen(port, () => {
+    console.log(`Server ${port} portda ishlamoqda`);
+});
