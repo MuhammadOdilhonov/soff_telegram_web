@@ -19,7 +19,7 @@ const questions = {};  // Savollarni saqlash uchun
 const bootstrap = () => {
     bot.setMyCommands([
         { command: '/start', description: 'Boshlash' },
-        { command: '/help', description: 'Savolim bor' },
+        { command: '/help', description: 'Savollaringiz bormi ?' },
         { command: '/dating', description: 'Tanlang' },
     ]);
 
@@ -39,6 +39,25 @@ const bootstrap = () => {
                                     text: "Saytni ko'rish",
                                     web_app: {
                                         url: "https://soff.uz/"
+                                    }
+                                }
+                            ]
+                        ]
+                    }
+                }
+            );
+        } else if (text === '/ishga_tushirish') {
+            await bot.sendMessage(
+                chatId,
+                "Botni ishga tushirissh",
+                {
+                    reply_markup: {
+                        inline_keyboard: [
+                            [
+                                {
+                                    text: "tushirish",
+                                    web_app: {
+                                        url: "https://soff-telegram-web.onrender.com"
                                     }
                                 }
                             ]
@@ -170,6 +189,45 @@ Endilikda siz Soff Marketi orqali o'z intellektual mulklaringizni joylab daromad
                 console.error('Xatolik:', error);
                 await bot.sendMessage(msg.chat.id, 'Videoni yuborishda xatolik yuz berdi.');
             }
+        } else if (data === 'savol_javoblar') {
+            const responseText = "Savol-javoblar bo'limiga xush kelibsiz! Quyidagi bo'limlardan birini tanlang:";
+            await bot.sendMessage(
+                msg.chat.id,
+                responseText,
+                {
+                    reply_markup: {
+                        inline_keyboard: [
+                            [{ text: "Savdo", callback_data: 'savdo' }],
+                            [{ text: "Umumiy savollar", callback_data: 'umumiy_savollar' }],
+                            [{ text: "Ro'yxatdan o'tish bo'yicha", callback_data: 'ro_yxatdan_otish' }]
+                        ]
+                    }
+                }
+            );
+        } else if (data === 'savdo') {
+            await bot.sendMessage(
+                msg.chat.id,
+                "*Soff Marketda nimalar sotish mumkin*\nSoff Marketi orqali o'z intellektual mulklaringizni joylab daromad topishingiz mumkin. Sizda mavjud bo'lgan taqdimotlar, kurs ishlari, diplom ishlari, dissertatsiya ishlari, kitoblar, biznes rejalar, referatlar, o'quv qo'llanmalar, dars ishlanmalari v.k Soff Marketda bo'lgan barcha kategoriyadagi intellektual mulklaringizni yuklab sotishingiz mumkin!",
+                { parse_mode: 'Markdown' }
+            );
+            await bot.sendMessage(
+                msg.chat.id,
+                "*Yuklagan mahsulotim, usha zahoti saytda chiqmayapti, nega?*\nSizning yuklagan mahsulotingiz 24 soat ichida saytda paydo bo'ladi. Mahsulot marketda paydo bo'lishida \"Moderatsiya\" statusidan o'tishi kerak. Ya'ni biz Moderatorlarimiz sizning yuklagan mahsulotingiz sotuvga yaroqligi va kamchiliklar yo'qligi tekshiriladi. Hammasi joyida bo'lgandan so'ng Moderator mahsulotingizga \"Tasdiqlangan\" statusini beradi va siz mahsulotingizni marketda ko'rishingiz mumkin bo'ladi. Agar \"Bekor qilingan\" status siz qabul qilsangiz bilingki sizning mahsulotingizda qandaydir kamchilik borligidan dalolat beradi. Bunday vaziyatda mahsulotingizni qayta tahrirlab, yana bir bor yuklab ko'rishingiz mumkin bo'ladi.",
+                { parse_mode: 'Markdown' }
+            );
+
+        } else if (data === 'umumiy_savollar') {
+            await bot.sendMessage(
+                msg.chat.id,
+                "*Balansimdagi pulni qanday yechib olishim mumkin*\nBalansingizdagi pulni yechib olishingiz uchun \"Arizalar\" bo'limidan ariza jo'natishingiz kerak bo'ladi. Arizangizda siz kartangizni va pul miqdorini kiritishingiz kerak bo'ladi. 24 soat ichida Soff Market Adminlari sizning arizangizda hech qanday kamchiliklar yo'qligida amin bo'lganlaridan so'ng ko'rsatgan pul miqdoringizni o'tkazib beradilar.",
+                { parse_mode: 'Markdown' }
+            );
+        } else if (data === 'ro_yxatdan_otish') {
+            await bot.sendMessage(
+                msg.chat.id,
+                "*Sotuvchi bo'lmoqchiman, qayerdan ro'yxatdan o'tishim kerak?*\n\"Sotuvchiga aylaning\" deb nomlangan menyuni bosing, batafsil ma'lumotni usha yerdan olishingiz mumkin.",
+                { parse_mode: 'Markdown' }
+            );
         } else if (data.startsWith('answer_')) {
             const questionId = data.split('_')[1];
             const question = questions[questionId];
